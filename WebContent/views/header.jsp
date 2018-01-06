@@ -16,7 +16,7 @@
         <li><a href="${pageContext.request.contextPath }/employees">Employees</a></li>
         <li><a href="${pageContext.request.contextPath }/cars">Cars</a></li>
         <li><a href="${pageContext.request.contextPath }/clients">Clients</a></li>
-        <li><a href="#">Raports</a></li>
+        <li><a href="${pageContext.request.contextPath }/reports">Reports</a></li>
       </ul>
     </div>
   </header>

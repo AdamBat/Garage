@@ -26,7 +26,13 @@ Employee<select name="employeeId">
 <br>
 Problem description<input type="text"value="${order.descProblem }" name="descProblem"><br>
 Repair description<input type="text"value="${order.descRepair }" name="descRepair"><br>
-Status<input type="text" name="status"value="${order.status }"><br>
+Status<select name="status">
+            <option value="Accepted">Accepted</option>
+            <option value="Repair costs accepted">Repair costs Accepted</option>
+            <option value="Currently repaired">Currently repaired</option>
+            <option value="Ready to collect">Ready to collect</option>
+            <option value="Resigned">Resigned</option>
+        </select> <br> 
 Repair Cost<input type="text" name="repairCost"value="${order.repairCost }"><br>
 Parts Cost<input type="text" name="partsCost"value="${order.partsCost }"><br>
 Employee Hours<input type="text" name="employeeHours"value="${order.employeeHours}"><br>

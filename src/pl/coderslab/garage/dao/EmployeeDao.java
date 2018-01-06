@@ -1,11 +1,16 @@
 package pl.coderslab.garage.dao;
 
+import java.math.BigDecimal;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import pl.coderslab.garage.connection.ConnectionManager;
 import pl.coderslab.garage.model.Employee;
@@ -15,6 +20,27 @@ public class EmployeeDao {
 	Connection connection;
 	ResultSet rs;
 	List<Employee> list;
+	Map<String, BigDecimal> map;
+
+	public Map<String, BigDecimal> loadEmployeesAndHours(Date start, Date end) {
+		System.out.println(start);
+		connection = ConnectionManager.getConnection();
+		String sql = "SELECT CONCAT(employee.firstName,' ',employee.LastName) as employee, sum(emp_hours)  FROM employee join orders on orders.employee_id=employee.id "
+				+ "where orders.start_date >=" + start + " and orders.start_date>=" + end + " group by employee_id;";
+		try {
+			Statement statement1 = connection.createStatement();
+			rs = statement1.executeQuery(sql);
+			map = new HashMap<>();
+			while (rs.next()) {
+
+				map.put(rs.getString(1), rs.getBigDecimal(2));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return map;
+
+	}
 
 	public List<Employee> getAllEmployees() {
 		connection = ConnectionManager.getConnection();
@@ -50,7 +76,6 @@ public class EmployeeDao {
 
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return emp;
