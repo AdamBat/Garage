@@ -26,7 +26,7 @@ public class EmployeeDao {
 		System.out.println(start);
 		connection = ConnectionManager.getConnection();
 		String sql = "SELECT CONCAT(employee.firstName,' ',employee.LastName) as employee, sum(emp_hours)  FROM employee join orders on orders.employee_id=employee.id "
-				+ "where orders.start_date >=" + start + " and orders.start_date>=" + end + " group by employee_id;";
+				+ "where orders.start_date >=" + start + " and orders.start_date<=" + end + " group by employee_id;";
 		try {
 			System.out.println(sql);
 			Statement statement1 = connection.createStatement();
