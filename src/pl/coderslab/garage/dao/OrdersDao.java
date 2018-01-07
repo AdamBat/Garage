@@ -1,10 +1,12 @@
 package pl.coderslab.garage.dao;
 
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,6 +17,24 @@ public class OrdersDao {
 	PreparedStatement statement;
 	ResultSet rs;
 	List<Orders> list;
+	Connection connection;
+
+	public BigDecimal getFinancialReport(Date start, Date end) {
+		BigDecimal result = new BigDecimal(0);
+		connection = ConnectionManager.getConnection();
+		String sql = "select sum(repair_cost-parts_cost-(emp_hours*emp_wage)) as result from orders"
+				+ " where end_date >'" + start + "' and end_date<'" + end + "'";
+		try {
+			Statement statement1 = connection.createStatement();
+			rs = statement1.executeQuery(sql);
+			while (rs.next()) {
+				result = rs.getBigDecimal(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
 
 	public List<Orders> getAllOrders() {
 		String sql = "Select * from orders";

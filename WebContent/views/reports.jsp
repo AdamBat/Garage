@@ -12,16 +12,18 @@
 </head>
 <body>
     <%@ include file="/views/header.jsp"%>
-    Get Employee Report
+    GetReports
     <form action ="${pageContext.request.contextPath }/reports1">
     Start Date<input type="text" name="startDate">
     End Date<input type="text" name="endDate">
-    <input type="submit" value="Get Report">
-    
-    
-    
+    <input type="submit" value="Get Employee Report">   
     </form>
-
+    
+    <form action ="${pageContext.request.contextPath }/reports2">
+    Start Date<input type="text" name="startDate">
+    End Date<input type="text" name="endDate">
+    <input type="submit" value="Get Financial Report">   
+    </form>
 <%@ include file="/views/footer.jsp"%>
 </body>
 </html>

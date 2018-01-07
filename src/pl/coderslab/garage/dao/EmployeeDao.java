@@ -28,6 +28,7 @@ public class EmployeeDao {
 		String sql = "SELECT CONCAT(employee.firstName,' ',employee.LastName) as employee, sum(emp_hours)  FROM employee join orders on orders.employee_id=employee.id "
 				+ "where orders.start_date >=" + start + " and orders.start_date>=" + end + " group by employee_id;";
 		try {
+			System.out.println(sql);
 			Statement statement1 = connection.createStatement();
 			rs = statement1.executeQuery(sql);
 			map = new HashMap<>();
